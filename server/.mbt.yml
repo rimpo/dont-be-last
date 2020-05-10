@@ -1,0 +1,6 @@
+name: server
+dependencies: [dont-be-last]
+commands:
+    build:
+        name: build
+        cmd: go build main.go
