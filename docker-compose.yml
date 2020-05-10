@@ -1,0 +1,28 @@
+version: "3.5"
+
+services:
+
+  server:
+    build: ./server
+    ports:
+      - "50000:5000"
+    environment:
+      - DONTBELAST_DATABASE_URI
+    depends_on: [db]
+
+  db:
+    build:
+      ./db
+    ports:
+      - "54320:5432"
+    environment:
+      - POSTGRES_USER
+      - POSTGRES_PASSWORD
+      - DONTBELAST_DATABASE_USER
+      - DONTBELAST_DATABASE_PASSWORD
+      - DONTBELAST_DATABASE_NAME
+    volumes:
+      - database-data:/var/lib/postgresql/data/
+
+volumes:
+  database-data:
