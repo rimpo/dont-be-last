@@ -11,7 +11,7 @@ func NewService() *service {
 	return &service{}
 }
 
-func (g *service) GameState(gameId int) *api.GameState {
+func (g *service) GetCurrentState(gameId int) *api.GameState {
 	return nil
 }
 

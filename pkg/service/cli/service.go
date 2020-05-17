@@ -3,7 +3,7 @@ package cli
 import "github.com/rimpo/dont-be-last/pkg/api"
 
 type GameService interface {
-	func GameState(gameId int) *api.GameState
+	func GetCurrentState(gameId int) *api.GameState
 	func Move(gameId int,move []int) *api.GameState
 }
 
