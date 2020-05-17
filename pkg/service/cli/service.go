@@ -8,5 +8,5 @@ type GameService interface {
 }
 
 type AuthService interface {
-	Login(userName, password string) (string, string, error)
+	Login(userName, password string) (string, int, error)
 }

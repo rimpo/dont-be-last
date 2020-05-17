@@ -1,23 +1,23 @@
 package api
 
 type LoginResponse struct {
-	Id int64 `json: "id"`
+	Id int `json: "id"`
 }
 
 type PlayerInfo struct {
-	Id       int64  `json: "id"`
+	Id       int    `json: "id"`
 	Name     string `json: "name"`
 	IsTurn   bool   `json: "is_turn"`
 	IsWinner bool   `json: "is_winner"`
 }
 
 type Move struct {
-	Id       int64   `json: "id"`
-	PlayerId int64   `json: "player_id"`
-	Move     []int64 `json: "move"`
+	Id       int   `json: "id"`
+	PlayerId int   `json: "player_id"`
+	Move     []int `json: "move"`
 }
 type GameState struct {
-	Id      int64 `json: "id"`
+	Id      int   `json: "id"`
 	Board   []int `json: "board"`
 	Players struct {
 		Own      PlayerInfo `json: "own"`
@@ -26,12 +26,12 @@ type GameState struct {
 }
 
 type Player struct {
-	Id   int64  `json: "id"`
+	Id   int    `json: "id"`
 	Name string `json: "name"`
 }
 
 type GameWaiting struct {
-	Id       int64  `json: "id"`
+	Id       int    `json: "id"`
 	Opponent Player `json: "opponent"`
 }
 

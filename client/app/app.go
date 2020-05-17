@@ -3,37 +3,28 @@ package app
 import (
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
-	"fyne.io/fyne/widget"
 	"github.com/rimpo/dont-be-last/pkg/service/cli"
 )
 
 type application struct {
 	app         fyne.App
-	window      fyne.Window
 	authService cli.AuthService
 	gameService cli.GameService
+	lw          *loginWindow
 }
 
 func New(authService cli.AuthService, gameService cli.GameService) *application {
-	app := app.New()
-	window := app.NewWindow("Login")
-
 	a := &application{
-		app:         app,
-		window:      window,
+		app:         app.New(),
 		authService: authService,
 		gameService: gameService,
+		lw:          newLoginWindow(authService),
 	}
 
-	a.window.SetContent(widget.NewVBox(
-		widget.NewLabel("Hello Fyne!"),
-		widget.NewButton("Quit", func() {
-			a.app.Quit()
-		}),
-	))
+	a.lw.Load(a.app)
 	return a
 }
 
 func (a *application) Run() {
-	a.window.ShowAndRun()
+	a.app.Run()
 }

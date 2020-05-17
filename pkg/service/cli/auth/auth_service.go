@@ -8,6 +8,6 @@ func NewService(url string) *service {
 	return &service{url: url}
 }
 
-func (a *service) Login(userName, password string) (string, string, error) {
-	return "", "", nil
+func (a *service) Login(userName, password string) (string, int, error) {
+	return "abc", 1, nil
 }
