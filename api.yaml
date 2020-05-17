@@ -75,6 +75,33 @@ paths:
                 schema:
                   $ref: '#/components/schemas/GameState'
 
+  /games/{id}/move:
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        description: unique game id
+        required: true
+        style: simple
+    post:
+      tags:
+        - "Game"
+      requestBody:
+          description: login details
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MoveRequest'
+      responses:
+          200:
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/GameState'
+
 components:
   securitySchemes:
     sharedSecretAuth:
@@ -121,12 +148,10 @@ components:
     Board:
       type: array
       items:
-        type: array
-        items:
-          properties:
-            id:
-              type: integer
-              description: 0 -> not active cell & 1 -> active cell
+        properties:
+          id:
+            type: integer
+            description: 0 -> inactive cell & 1 -> active cell
 
     PlayerInfo:
       type: object
@@ -143,4 +168,14 @@ components:
         is_winner:
           type: string
           description: true -> player won
-    
+
+    MoveRequest:
+      type: object
+      properties:
+        moves:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+                description: Index of the board's cell
