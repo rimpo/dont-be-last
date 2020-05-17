@@ -44,7 +44,7 @@ func (lw *loginWindow) Load(app fyne.App) {
 			fmt.Println("error")
 			return
 		}
-		lw.token = lw.token
+		lw.token = token
 		lw.playerId = playerId
 	})
 
