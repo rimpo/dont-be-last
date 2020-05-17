@@ -43,7 +43,7 @@ paths:
     get:
       tags:
         - "Game"
-      summary: retrieve all games with player waiting
+      summary: Retrieve all games with player waiting
       responses:
         200:
           description: OK
@@ -66,7 +66,7 @@ paths:
     get:
       tags:
         - "Game"
-      summary: retrieve game state based on game id
+      summary: Retrieve game state based on game id
       responses:
           200:
             description: OK
@@ -87,6 +87,7 @@ paths:
     post:
       tags:
         - "Game"
+      summary: Player move for the game id
       requestBody:
           description: login details
           required: true
