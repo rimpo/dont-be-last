@@ -69,7 +69,10 @@ paths:
       responses:
           200:
             description: OK
-            ref: '#/components/schemas/GameState'
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/GameState'
 
 components:
   securitySchemes:
