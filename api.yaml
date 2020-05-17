@@ -1,0 +1,109 @@
+openapi: "3.0.0"
+info:
+  version: "1.0.0"
+  title: "Dont-Be-Last API"
+
+security:
+  - sharedSecretAuth: []
+
+paths:
+  /login:
+    post:
+      tags:
+        - "Player"
+      summary: Authenticate user
+      requestBody:
+        description: login details
+        required: true
+        content:
+          application/json:
+            $ref: '#/components/schemas/LoginRequest'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+        401:
+          description: unauthorized 
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+
+  /games/:
+    get:
+      tags:
+        - "Game"
+      summary: retrieve all games with player waiting
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GameWaitingList'
+
+
+
+  /games/{id}/state:
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        description: unique game id
+        required: true
+        style: simple
+    get:
+      tags:
+        - "Game"
+      summary: retrieve game state based on game id
+      responses:
+          200:
+            description: OK
+            ref: '#/components/schemas/GameState'
+
+components:
+  securitySchemes:
+    sharedSecretAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+
+  schemas:
+    LoginRequest:
+      type: object
+      properties:
+        username: 
+          type: string
+        password: 
+          type: string
+
+    GameWaitingList:
+      type: object
+      properties:
+        games:
+          type: array
+          items:
+            properties:
+              id: 
+                type: string
+                description: game id
+              player_name:
+                type: string
+                description: opponent player waiting
+
+    GameState:
+      type: object
+      properties:
+        board:
+          $ref: '#/components/schemas/Board'
+    
