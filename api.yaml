@@ -25,10 +25,8 @@ paths:
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  token:
-                    type: string
+                $ref: '#/components/schemas/LoginResponse'
+
         401:
           description: unauthorized 
           content:
@@ -51,8 +49,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/GameWaitingList'
-
-
 
   /games/{id}/state:
     parameters:
@@ -119,23 +115,60 @@ components:
         password: 
           type: string
 
+    LoginResponse:
+      type: object
+      properties:
+        token:
+          type: string
+          description: token user for Authorization
+        player_id:
+          type: integer
+          description: player id
+
+    Player:
+      type: object
+      properties:
+        id:
+          type: string
+          description: player id
+        Name:
+          type: string
+          description: player name
+
     GameWaitingList:
       type: object
       properties:
-        games:
+        games_waiting:
           type: array
           items:
             properties:
-              id: 
-                type: string
+              id:
+                type: integer
                 description: game id
-              player_name:
-                type: string
-                description: opponent player waiting
+              opponent:
+                $ref: '#/components/schemas/Player'
+
+    Move:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: move id
+        player_id:
+          type: integer
+        move:
+          type: array
+          items:
+            properties:
+              id:
+                type: integer
+                description: index of board cell
 
     GameState:
       type: object
       properties:
+        id:
+          type: integer
         board:
           $ref: '#/components/schemas/Board'
         players:
@@ -145,7 +178,10 @@ components:
                 $ref: '#/components/schemas/PlayerInfo'
               opponent:
                 $ref: '#/components/schemas/PlayerInfo'
-
+        moves:
+          type: array
+          items:
+            $ref: '#/components/schemas/Move'
     Board:
       type: array
       items:
