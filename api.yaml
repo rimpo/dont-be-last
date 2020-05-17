@@ -17,7 +17,8 @@ paths:
         required: true
         content:
           application/json:
-            $ref: '#/components/schemas/LoginRequest'
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
       responses:
         200:
           description: OK
@@ -109,7 +110,14 @@ components:
       properties:
         board:
           $ref: '#/components/schemas/Board'
-    
+        players:
+          type: object
+          properties:
+              own:
+                $ref: '#/components/schemas/PlayerInfo'
+              opponent:
+                $ref: '#/components/schemas/PlayerInfo'
+
     Board:
       type: array
       items:
@@ -118,6 +126,21 @@ components:
           properties:
             id:
               type: integer
-              description: 0 -> not active cell & 1 -> still active cell
-          
+              description: 0 -> not active cell & 1 -> active cell
+
+    PlayerInfo:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: player id
+        name:
+          type: string
+          description: player name
+        is_turn:
+          type: boolean
+          description: true -> player's turn
+        is_winner:
+          type: string
+          description: true -> player won
     
