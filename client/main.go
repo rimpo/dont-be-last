@@ -4,7 +4,7 @@ import (
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/widget"
-	"github.com/rimpo/dont-be-last/pkg/service/cli/"
+	"github.com/rimpo/dont-be-last/pkg/service/cli"
 	"github.com/rimpo/dont-be-last/pkg/service/cli/auth"
 	"github.com/rimpo/dont-be-last/pkg/service/cli/game"
 )
