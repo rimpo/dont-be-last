@@ -107,3 +107,14 @@ components:
         board:
           $ref: '#/components/schemas/Board'
     
+    Board:
+      type: array
+      items:
+        type: array
+        items:
+          properties:
+            id:
+              type: integer
+              description: 0 -> not active cell & 1 -> still active cell
+          
+    
