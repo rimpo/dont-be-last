@@ -26,12 +26,14 @@ func newLoginWindow(authService cli.AuthService) *loginWindow {
 }
 
 func (lw *loginWindow) OnLoginPress() {
-	// username := "player1"
-	// password := "test@123"
-	// token, player_id, err := lw.authService.Login(username, password)
-	// if err != nil {
-
-	// }
+	token, playerId, err := lw.authService.Login(lw.userNameEntry.Text, lw.passwordEntry.Text)
+	if err != nil {
+		fmt.Println("error")
+		return
+	}
+	lw.token = token
+	lw.playerId = playerId
+	lw.window.Close()
 }
 
 func (lw *loginWindow) Load(app fyne.App) {
@@ -39,15 +41,8 @@ func (lw *loginWindow) Load(app fyne.App) {
 	lw.userNameEntry = widget.NewEntry()
 	lw.passwordEntry = widget.NewPasswordEntry()
 	lw.loginBtn = widget.NewButton("login", func() {
-		token, playerId, err := lw.authService.Login(lw.userNameEntry.Text, lw.passwordEntry.Text)
-		if err != nil {
-			fmt.Println("error")
-			return
-		}
-		lw.token = token
-		lw.playerId = playerId
+		lw.OnLoginPress()
 	})
-
 	lw.window.SetContent(
 		fyne.NewContainerWithLayout(
 			layout.NewGridLayout(1),

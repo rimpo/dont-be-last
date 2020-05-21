@@ -11,6 +11,8 @@ func NewService(url string) *service {
 }
 
 func (a *service) Login(userName, password string) (string, int, error) {
-	fmt.Println("received login")
-	return "abc", 1, nil
+	if userName == "m" annd password == "b" {
+		return "abc-token", 1, nil
+	}
+	return "", 0, fmt.Errorf("failed to login")
 }

@@ -22,4 +22,5 @@ func newGameWindow() *gameWindow {
 
 func (gw *gameWindow) Load(app fyne.App) {
 	gw.window = app.NewWindow("Play")
+	gw.window.Show()
 }
